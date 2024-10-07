@@ -1,5 +1,5 @@
 
-public class tree2 {
+public class preorder {
 
     static class Node {
 
@@ -9,24 +9,22 @@ public class tree2 {
 
         Node(int data) {
             this.data = data;
-            this.left = null;
-            this.right = null;
+            this.left = left;
+            this.right = right;
         }
-
     }
 
     static class BinaryTree {
 
-        static int idx = -1;
+        static int index = -1;
 
         public static Node builtTree(int nodes[]) {
-            idx++;
-
-            if (nodes[idx] == -1) {
+            index++;
+            if (nodes[index] == -1) {
                 return null;
             }
 
-            Node newNode = new Node(nodes[idx]);
+            Node newNode = new Node(nodes[index]);
             newNode.left = builtTree(nodes);
             newNode.right = builtTree(nodes);
 
@@ -34,11 +32,22 @@ public class tree2 {
         }
     }
 
+    public static void preorder(Node root) {
+        if (root == null) {
+            return;
+        }
+
+        System.out.print(root.data + " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+
     public static void main(String[] args) {
         int nodes[] = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
+
         BinaryTree tree = new BinaryTree();
 
         Node root = tree.builtTree(nodes);
-        System.out.println(root.data);
+        preorder(root);
     }
 }
